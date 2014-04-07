@@ -49,6 +49,11 @@ KeyboardInputManager.prototype.listen = function () {
     65: 3  // A
   };
 
+  //respond to doubleclick
+  document.addEventListener("dblclick", function (event) {
+      self.restart.call(self, event);
+  });
+
   // Respond to direction keys
   document.addEventListener("keydown", function (event) {
     var modifiers = event.altKey || event.ctrlKey || event.metaKey ||
