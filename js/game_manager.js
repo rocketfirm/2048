@@ -4,11 +4,15 @@ function GameManager(size, InputManager, Actuator, StorageManager) {
   this.storageManager = new StorageManager;
   this.actuator       = new Actuator;
 
+  this.targetScore    = location.search.split('targetScore=')[1] || 2048;
+
   this.startTiles     = 2;
 
   this.inputManager.on("move", this.move.bind(this));
   this.inputManager.on("restart", this.restart.bind(this));
   this.inputManager.on("keepPlaying", this.keepPlaying.bind(this));
+
+  document.title=this.targetScore;
 
   this.setup();
 }
@@ -171,7 +175,7 @@ GameManager.prototype.move = function (direction) {
           self.score += merged.value;
 
           // The mighty 2048 tile
-          if (merged.value === 2048) self.won = true;
+          if (merged.value === self.targetScore) self.won = true;
         } else {
           self.moveTile(tile, positions.farthest);
         }
